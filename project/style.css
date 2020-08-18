@@ -1,0 +1,22 @@
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.header {
+    margin-top: 15px;
+}
+
+.margin {
+    margin-top: 40px;
+}
+
+.products {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.card-img-top {
+    width: auto;
+}
