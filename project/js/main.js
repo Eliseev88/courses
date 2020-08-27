@@ -1,3 +1,20 @@
+let getRequest = (url) => {
+  return new Promise((resolve, reject) => {
+    let xhr = new XMLHttpRequest();
+    xhr.open('GET', url, true);
+    xhr.onreadystatechange = () => {
+      if(xhr.readyState === 4) {
+        if(xhr.status !== 200) {
+          let error = new Error(xhr.statusText);
+          error.code = xhr.status;
+          reject(error);
+        } else resolve(xhr.responseText);
+      }
+    }
+    xhr.send();
+  });
+};
+
 class GoodsList {
 
   constructor (container = '.products') {
@@ -7,19 +24,29 @@ class GoodsList {
     this.basket = null;
     this.url = 'https://raw.githubusercontent.com/Eliseev88/courses/master/project/goods.json';
 
-    this.#fetchProducts(this.url);
+    this.#getProducts(this.url);
     this.#render();
   }
 
-  #fetchProducts(url) {
-    fetch(url)
-    .then(data => data.json())
-    .then(items => {this.goods = items})
-    
+  #getProducts(url) {
+    getRequest(url)
+      .then(response => {
+        this.goods = JSON.parse(response);
+        this.#render();
+      })
+      .catch(error => {
+        console.error(`Всё плохо... ${error}`);
+      });
   }
 
+  // #fetchProducts(url) {
+  //   fetch(url)
+  //   .then(data => data.json())
+  //   .then(items => {this.goods = items})
+    
+  // }
+
   #render() {
-    setTimeout(() => {
       const block = document.querySelector(this.container);
       for (let product of this.goods) {
         const productObject = new ProductItem(product);
@@ -28,7 +55,6 @@ class GoodsList {
       }
         this.basket = new GoodsCart();
         block.addEventListener('click', evt => this.basket.addProductToBasket(evt));
-    }, 200);
   }
 }
 
@@ -83,7 +109,6 @@ class GoodsCart {
     let find = this.items.find(el => el.id == product.id);
     if (!find) this.items.push(Object.assign(product, { amount: 1 }));
     else find.amount++;
-    console.log(this.getTotalSum());
   }
   
   getTotalSum() {

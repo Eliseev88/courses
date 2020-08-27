@@ -7,6 +7,9 @@
     margin-top: 15px;
 }
 
+.main {
+    position: relative;
+}
 .margin {
     margin-top: 40px;
 }
@@ -19,4 +22,19 @@
 
 .card-img-top {
     width: auto;
+}
+
+.flex {
+    display: flex;
+    justify-content: space-between;
+}
+
+.cart {
+    display: none;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100px;
+    height: 100px;
+    background-color: blue;  
 }
