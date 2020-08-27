@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Make your own hamburger</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/8d73d6a795.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="page" id="page">
+    <header class="header">
+        <div class="header__box">
+            <h1 class="header__title">
+                <span class="color-red">create</span>
+                <br>
+                <span class="color-blue">your own burger</span>
+            </h1>
+        </div>
+        <button type="button" class="btn btn-primary btn-lg order__btn" id="begin">Make me the best</button>
+        <div class="results">
+            <div id="render-pr"></div>
+            <div id="render-cl"></div>
+        </div>
+    </header>
+        
+</div>
+
+<form id="form" class="popup">
+    <button class="popup__close" id="close"><i class="fa fa-close"></i></button>
+    <div class="wrapper">
+        <div class="size__div">
+            <h3 class="size">Choose your burger size</h3>
+            <div class="content">
+                <div class="text">
+                    <span class="text__span">Small</span>
+                    <br>
+                    <span class="text__span">50 $</span>
+                    <br>
+                    <span class="text__span">20 Cal</span>
+                </div>
+                <label for="small"><img class="hamburger__img small" src="img/small_burger.png" alt="small hamburger"></label>
+                <input class="input__size" type="radio" name="burger" id="small" value="small" data-price="50" data-calories="20" checked>
+                <div class="text">
+                    <span class="text__span">Big</span>
+                    <br>
+                    <span class="text__span">100 $</span>
+                    <br>
+                    <span class="text__span">40 Cal</span>
+                </div>
+                <label for="big"><img class="hamburger__img big" src="img/burger.png" alt="big hamburger"></label>
+                <input class="input__size" type="radio" name="burger" id="big" value="big" data-price="100" data-calories="40">
+            </div>
+        </div>
+
+        <div class="stuffing">
+            <h3 class="size">Choose stuffing</h3>
+            <div class="content">
+                <div class="text">
+                    <span class="text__span">Cheese</span>
+                    <br>
+                    <span class="text__span">10 $</span>
+                    <br>
+                    <span class="text__span">20 Cal</span>
+                </div>
+                <label for="cheese"><img class="stuffing__img" src="img/cheese.png" alt="cheese"></label>
+                <input class="input__size" type="checkbox" id="cheese" name="stuffing" data-name="cheese" data-price="10" data-calories="20" checked>
+                <div class="text">
+                    <span class="text__span">Lettuce</span>
+                    <br>
+                    <span class="text__span">20 $</span>
+                    <br>
+                    <span class="text__span">5 Cal</span>
+                </div>
+                <label for="letuce"><img class="stuffing__img" src="img/lettuce.png" alt="letuce"></label>
+                <input class="input__size" type="checkbox" id="letuce" name="stuffing" data-name="letuce" data-price="20" data-calories="5">
+                <div class="text">
+                    <span class="text__span">French fries</span>
+                    <br>
+                    <span class="text__span">15 $</span>
+                    <br>
+                    <span class="text__span">10 Cal</span>
+                </div>
+                <label for="fries"><img class="stuffing__img" src="img/French_Fries.png" alt="fries"></label>
+                <input class="input__size" type="checkbox" id="fries" name="stuffing" data-name="fries" data-price="15" data-calories="10">
+            </div>
+        </div>
+    
+        <div class="topping">
+            <h3 class="size">Add topping</h3>
+            <div class="content">
+                <div class="text">
+                    <span class="text__span">Mayonnaise</span>
+                    <br>
+                    <span class="text__span">20 $</span>
+                    <br>
+                    <span class="text__span">5 Cal</span>
+                </div>
+                <label for="mayonnaise"><img class="topping__img" src="img/mayonnaise.png" alt="mayonnaise"></label>
+                <input class="input__size" type="checkbox" id="mayonnaise" name="topping" data-name="mayonnaise" data-price="20" data-calories="5">
+                <div class="text">
+                    <span class="text__span">Sauce</span>
+                    <br>
+                    <span class="text__span">15 $</span>
+                    <br>
+                    <span class="text__span">0 Cal</span>
+                </div>
+                <label for="specii"><img class="topping__img" src="img/specii.png" alt="specii"></label>
+                <input class="input__size" type="checkbox" id="specii" name="topping" data-name="specii" data-price="15" data-calories="0">
+            </div>
+        </div>
+    </div>
+    
+
+    <button type="button" class="btn btn-primary btn-sm next" id="next">Next</button>
+    <button type="button" class="btn btn-primary btn-sm next" id="next2">Next</button>
+    <button type="button" class="btn btn-primary btn-sm next" id="complite">Complite</button>
+
+    <input type="reset" id="reset" class="cancel">
+
+</form>
+
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+<script src="app.js"></script>
+</body>
+</html>
