@@ -1,7 +1,7 @@
 [
     {
         "id_product":1,
-        "title":"Notebook",
+        "product_name":"Notebook",
         "price":20000,
         "img":"img/Notebook.jpg"
     },
