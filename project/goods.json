@@ -1,26 +1,25 @@
 [
     {
-        "id":1,
-        "title":
-        "Notebook",
+        "id_product":1,
+        "title":"Notebook",
         "price":20000,
         "img":"img/Notebook.jpg"
     },
     {
-        "id":2,
-        "title":"Mouse",
+        "id_product":2,
+        "product_name":"Mouse",
         "price":1500,
         "img":"img/Mouse.jpg"
     },
     {
-        "id":3,
-        "title":"Keyboard",
+        "id_product":3,
+        "product_name":"Keyboard",
         "price":5000,
         "img":"img/Keyboard.jpg"
     },
     {
-        "id":4,
-        "title":"Gamepad",
+        "id_product":4,
+        "product_name":"Gamepad",
         "price":4500,
         "img":"img/Gamepad.jpg"
     }
