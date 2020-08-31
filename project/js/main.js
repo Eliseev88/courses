@@ -1,85 +1,148 @@
-let getRequest = (url) => {
-  return new Promise((resolve, reject) => {
-    let xhr = new XMLHttpRequest();
-    xhr.open('GET', url, true);
-    xhr.onreadystatechange = () => {
-      if(xhr.readyState === 4) {
-        if(xhr.status !== 200) {
-          let error = new Error(xhr.statusText);
-          error.code = xhr.status;
-          reject(error);
-        } else resolve(xhr.responseText);
-      }
-    }
-    xhr.send();
-  });
-};
+const API = 'https://raw.githubusercontent.com/Eliseev88/courses/master/project';
 
-class GoodsList {
+// Переведено на промисы
+// let getRequest = (url) => {
+//     return new Promise((resolve, reject) => {
+//         let xhr = new XMLHttpRequest();
+//         xhr.open("GET", url, true);
+//         xhr.onreadystatechange = () => {
+//             if(xhr.readyState === 4){
+//                 if(xhr.status !== 200){
+//                     reject('Error');
+//                 } else {
+//                     resolve(xhr.responseText);
+//                 }
+//             }
+//         };
+//         xhr.send();
+//     })
+// };
 
-  constructor (container = '.products') {
+/**
+ * Описываем базовые классы
+ */
+class List {
+  constructor(url, container, list = listContext){
     this.container = container;
+    this.list = list; // словарь для классов строка 258
+    this.url = url;
     this.goods = [];
     this.allProducts = [];
-    this.basket = null;
-    this.url = 'https://raw.githubusercontent.com/Eliseev88/courses/master/project/goods.json';
-
-    this.#getProducts(this.url);
-    this.#render();
+    this.filtered = []; // отфильтрованные товары
+    this._init();
   }
 
-  #getProducts(url) {
-    getRequest(url)
-      .then(response => {
-        this.goods = JSON.parse(response);
-        this.#render();
-      })
+  /**
+   * получение данных с сервера
+   * @param url
+   * @returns {Promise<any | never>}
+   */
+  getJson(url){
+    return fetch(url ? url : `${API + this.url}`)
+      .then(result => result.json())
       .catch(error => {
-        console.error(`Всё плохо... ${error}`);
-      });
+        console.log(error);
+      })
   }
 
-  // #fetchProducts(url) {
-  //   fetch(url)
-  //   .then(data => data.json())
-  //   .then(items => {this.goods = items})
-    
-  // }
+  /**
+   * обработка полученных данных
+   * @param data
+   */
+  handleData(data){
+    this.goods = [...data];
+    this.render();
+  }
 
-  #render() {
-      const block = document.querySelector(this.container);
-      for (let product of this.goods) {
-        const productObject = new ProductItem(product);
-        this.allProducts.push(productObject);
-        block.insertAdjacentHTML("beforeend", productObject.render());
+  /**
+   * подсчет стоимости всех товаров
+   * @returns {*|number}
+   */
+  calcSum(){
+    return this.allProducts.reduce((accum, item) => accum += item.price, 0);
+  }
+  render(){
+    const block = document.querySelector(this.container);
+    for (let product of this.goods){
+      console.log(this.constructor.name);
+      const productObj = new this.list[this.constructor.name](product);
+      console.log(productObj);
+      this.allProducts.push(productObj);
+      block.insertAdjacentHTML('beforeend', productObj.render());
+    }
+  }
+
+  /**
+   * метод поиска товаров
+   * @param value - поисковый запрос
+   */
+  filter(value){
+    const regexp = new RegExp(value, 'i');
+    this.filtered = this.allProducts.filter(product => regexp.test(product.product_name));
+    this.allProducts.forEach(el => {
+      const block = document.querySelector(`.card[data-id="${el.id_product}"]`);
+      if(!this.filtered.includes(el)){
+        block.classList.add('invisible');
+      } else {
+        block.classList.remove('invisible');
       }
-        this.basket = new GoodsCart();
-        block.addEventListener('click', evt => this.basket.addProductToBasket(evt));
+    })
+  }
+  _init(){
+    return false
   }
 }
 
-class ProductItem {
-  constructor (product, amount = 1) {
-    this.id = product.id;
-    this.title = product.title;
-    this.price = product.price;
-    this.img = product.img;
-    this.amount = amount;
+class Item{
+  constructor(el){
+    this.product_name = el.product_name;
+    this.price = el.price;
+    this.id_product = el.id_product;
+    this.img = el.img;
+  }
+  render(){
+    return ``;
+  }
+}
+
+/**
+ * Наследуемся от базовых классов
+ */
+class ProductsList extends List{
+  constructor(cart, container = '.products', url = "/goods.json"){
+    super(url, container);
+    this.cart = cart;
+    this.getJson()
+      .then(data => this.handleData(data));
   }
 
+  _init(){
+    document.querySelector(this.container).addEventListener('click', e => {
+      if(e.target.classList.contains('buy-btn')){
+        this.cart.addProduct(e.target);
+      }
+    });
+    document.querySelector('.search-form').addEventListener('keyup', e => {
+      // e.preventDefault(); // если нужна кнопка "submit"
+      this.filter(document.querySelector('.search-field').value)
+    })
+  }
+}
+
+class ProductItem extends Item{
   render() {
-    return `<div class="card" style="width: 18rem;">
+    return  `<div class="card" style="width: 18rem;" data-id="${this.id_product}">
                 <img src="${this.img}" class="card-img-top" alt="${this.title}">
                 <div class="card-body">
-                  <h5 class="card-title">${this.title}</h5>
+                  <h5 class="card-title">${this.product_name}</h5>
                   <p class="card-text">${this.price} $</p>
                   <button
                    name="add"
-                   data-id="${this.id}" 
-                   data-title="${this.title}"
+                   data-id="${this.id_product}" 
+                   data-name="${this.product_name}"
                    data-price="${this.price}"
                    data-img="${this.img}"
-                   type="submit" class="btn btn-primary">
+                   type="submit" class="btn btn-primary buy-btn">
                     Buy
                   </button>
                 </div>
@@ -87,37 +150,169 @@ class ProductItem {
   }
 }
 
-class GoodsCart {
-  constructor() {
-    this.items = [];
-  }
-  
-  addProductToBasket(evt) {
-    if(evt.target.name = "add") {
-      let datas = evt.target.dataset;
-      let product = {
-        id: datas.id,
-        title: datas.title,
-        price: datas.price,
-        img: datas.img,
-      }
-      this.createBasketProduct(product);
-    }
+class Cart extends List{
+  constructor(container = ".cart", url = "/getBasket.json"){
+    super(url, container);
+    this.getJson()
+      .then(data => {
+        this.handleData(data.contents);
+      });
   }
 
-  createBasketProduct(product) {
-    let find = this.items.find(el => el.id == product.id);
-    if (!find) this.items.push(Object.assign(product, { amount: 1 }));
-    else find.amount++;
+  /**
+   * добавление товара
+   * @param element
+   */
+  addProduct(element){
+    this.getJson(`${API}/addToBasket.json`)
+      .then(data => {
+        if(data.result === 1){
+          let productId = +element.dataset['id'];
+          let find = this.allProducts.find(product => product.id_product === productId);
+          if(find){
+            find.quantity++;
+            this._updateCart(find);
+          } else {
+            let product = {
+              id_product: productId,
+              price: +element.dataset['price'],
+              product_name: element.dataset['name'],
+              img: element.dataset['img'],
+              quantity: 1
+            };
+            // goods - это своего рода "опорный" массив, отражающий список товаров, которые нужно отрендерить.
+            // При добавлении нового товара, нас интересует только он один.
+            this.goods = [product];
+            // далее вызывая метод render, мы добавим в allProducts только его, тем самым избегая лишнего перерендера.
+            this.render();
+          }
+        } else {
+          alert('Error');
+        }
+      })
   }
-  
-  getTotalSum() {
-    let sum = 0;
-    for(let key in this.items) {
-      sum += this.items[key].price * this.items[key].amount;
-    }
-    return sum;
+
+  /**
+   * удаление товара
+   * @param element
+   */
+  removeProduct(element){
+    this.getJson(`${API}/deleteFromBasket.json`)
+      .then(data => {
+        if(data.result === 1){
+          let productId = +element.dataset['id'];
+          let find = this.allProducts.find(product => product.id_product === productId);
+          if(find.quantity > 1){ // если товара > 1, то уменьшаем количество на 1
+            find.quantity--;
+            this._updateCart(find);
+          } else { // удаляем
+            this.allProducts.splice(this.allProducts.indexOf(find), 1);
+            document.querySelector(`.cart-item[data-id="${productId}"]`).remove();
+          }
+        } else {
+          alert('Error');
+        }
+      })
+  }
+
+  /**
+   * обновляем данные корзины
+   * @param product
+   * @private
+   */
+  _updateCart(product){
+    let block = document.querySelector(`.cart-item[data-id="${product.id_product}"]`);
+    block.querySelector('.product-quantity').textContent = `Количество: ${product.quantity}`;
+    block.querySelector('.product-price').textContent = `${product.quantity * product.price} $`;
+  }
+  _init(){
+    document.querySelector('.btn-cart').addEventListener('click', () => {
+      document.querySelector(this.container).classList.toggle('invisible');
+    });
+    document.querySelector(this.container).addEventListener('click', e => {
+      if(e.target.classList.contains('del-btn')){
+        this.removeProduct(e.target);
+      }
+    })
+  }
+
+}
+
+class CartItem extends Item{
+  constructor(el){
+    super(el);
+    this.quantity = el.quantity;
+  }
+  render(){
+    return `<div class="cart-item" data-id="${this.id_product}">
+            <div class="product-bio">
+            <img src="${this.img}" alt="${this.product_name}">
+            <div class="product-desc">
+            <p class="product-title">${this.product_name}</p>
+            <p class="product-quantity">Количество: ${this.quantity}</p>
+        <p class="product-single-price">${this.price} за ед.</p>
+        </div>
+        </div>
+        <div class="right-block">
+            <p class="product-price">${this.quantity*this.price} $</p>
+            <button class="del-btn" data-id="${this.id_product}">&times;</button>
+        </div>
+        </div>`
   }
 }
 
-let list = new GoodsList();
+const listContext = {
+  ProductsList: ProductItem,
+  Cart: CartItem
+};
+
+let cart = new Cart();
+let products = new ProductsList(cart);
+
+class ContactForm {
+  constructor(container = '.form__contact'){
+      this.container = container; 
+      this.userName = [];
+      this.userPhone = [];
+      this.userEmail = [];
+
+      this._init();  
+  }
+
+  _init() {
+    document.querySelector('#send').addEventListener('click', evt => {
+      const name = document.getElementById('input_name');
+      const phone = document.getElementById('input_phone');
+      const mail = document.getElementById('exampleInputEmail1');
+      this.validName(name);
+      this.validPhone(phone);
+      this.validEmail(mail);
+    });
+  }
+
+  validName(val) {
+      let rex = /^[А-Яа-яЁёA-Za-z]+$/g;
+      this.userName = val.value.match(rex);
+      this.addError(val);
+  }
+  validPhone(val) {
+      let rex = /^\+\d{1}\(\d{3}\)\d{3}-\d{4}$/;
+      this.userPhone = val.value.match(rex);
+      this.addError(val);
+  }
+  validEmail(val) {
+      let rex = /^[-._a-z0-9]+@(?:[a-z0-9][-a-z0-9]+\.)+[a-z]{2,6}$/;
+      this.userEmail = val.value.match(rex);
+      this.addError(val);
+  }
+
+  addError(val){
+      let error = 'Поле заполнено не верно'
+      if(this.userName === null) val.style.outline = "1px solid red";
+      if(this.userPhone === null) val.style.outline = "1px solid red";
+      if(this.userEmail === null) val.style.outline = "1px solid red";
+      console.log(error);    
+  }
+}
+
+const contact = new ContactForm();
