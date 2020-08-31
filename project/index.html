@@ -11,21 +11,48 @@
         <div class="container">
             <nav class="nav nav-pills flex-column flex-sm-row flex">
                 <a class="flex-sm-fill text-sm-center nav-link active" href="#">Home</a>
-                <button type="button" class="btn btn-primary">Cart</button>
+                <form action="#" class="search-form">
+                    <input class="search-field" type="text" placeholder="Search here...">
+                  </form>
+                <button type="button" class="btn btn-primary btn-cart">Cart</button>
               </nav>
+              <div class="cart" id="cart">
+                <!-- Render here   -->
+            </div>   
         </div>
     </header>
     <hr>
     <main>
-        <div class="cart" id="cart">
-            <!-- Render here   -->
-        </div>
         <div class="container margin">
             <div class="products">
               <!-- Render here   -->
             </div>
         </div>
     </main>
+    <footer class="container margin">
+        <form class="form__contact">
+            <div class="form-row">
+                <div class="col">
+                  <input type="text" class="form-control" id="input_name" placeholder="First name">
+                </div>
+            </div>
+            <br>
+            <div class="form-row">
+                <div class="col">
+                  <input type="text" class="form-control" id="input_phone" placeholder="Phone number">
+                </div>
+            </div>
+            <br>
+            <div class="form-group">
+                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Email address">
+            </div>  
+            <br>  
+            <div class="text">
+                <textarea name="textarea" id="textaria" cols="30" rows="5"></textarea>
+            </div>
+            <button type="button" class="btn btn-primary" id="send">Send</button>
+        </form>
+    </footer>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
