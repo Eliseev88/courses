@@ -5,12 +5,14 @@
     {
       "id_product": 1,
       "product_name": "Notebook",
+      "img": "img/Notebook.jpg",
       "price": 20000,
       "quantity": 1
     },
     {
       "id_product": 2,
       "product_name": "Mouse",
+      "img": "img/Mouse.jpg",
       "price": 1500,
       "quantity": 1
     }
