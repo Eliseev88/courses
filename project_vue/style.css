@@ -30,7 +30,7 @@
     background-color: white;
     padding: 20px;
     color: black;
-    width: 300px;
+    width: 360px;
 }
 .cart:before{
     content: '';
@@ -55,7 +55,9 @@
     width: auto;
 }
 
-
+.visible {
+    display: block;
+}
 .invisible{
     display: none;
 }
@@ -94,3 +96,12 @@
     font-size: 0.75em;
 }
 
+.right-block {
+    text-align: end;
+}
+
+.del-btn {
+    color: white;
+    background-color: #007bff;
+    cursor: pointer;
+}

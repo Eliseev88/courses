@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Интернет-магазин</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="app">
+        <header class="header">
+            <div class="container">
+                <nav class="nav nav-pills flex-column flex-sm-row flex">
+                    <a class="flex-sm-fill text-sm-center nav-link active" href="#">Home</a>
+                    <form action="#" class="search-form">
+                        <input class="search-field" type="text" placeholder="Search here..." 
+                            v-model.lazy="searchLine"
+                        >
+                        <button type="submit" @click="filter()">Search</button>
+                    </form>
+                    <button type="button" class="btn btn-primary btn-cart" @click="isVisibleCart=!isVisibleCart">Cart</button>
+                </nav>
+                <div class="cart" :class="{invisible: !isVisibleCart, visible: isVisibleCart}" id="cart">
+                    <div class="cart-item" v-for="cartItem of basket" :key="cartItem.id_product" 
+                        :data-id="cartItem.id_product">
+                        <div class="product-bio">
+                            <img :src="cartItem.img" alt="cartItem.product_name">
+                            <div class="product-desc">
+                                <p class="product-title">{{cartItem.product_name}}</p>
+                                <p class="product-quantity">Quantity: {{cartItem.quantity}}</p>
+                                <p class="product-single-price">{{cartItem.price}} per item</p>
+                            </div>
+                        </div>
+                        <div class="right-block">
+                            <p class="product-price">{{cartItem.quantity*cartItem.price}} $</p>
+                            <button class="del-btn" :data-id="cartItem.id_product">&times;</button>
+                        </div>
+                    </div>
+                </div>   
+            </div>
+        </header>
+        <hr>
+        <main>
+            <div class="container margin">
+                <div class="products">
+                    <div class="card" style="width: 18rem;" 
+                        v-for="product of products" :key="product.id_product" 
+                        :data-id="product.id_product">
+                            <img :src="product.img" class="card-img-top" :alt="product.product_name">
+                            <div class="card-body">
+                                <h5 class="card-title">{{product.product_name}}</h5>
+                                <p class="card-text">{{product.price}} $</p>
+                                <button
+                                    @click="addProduct(product)"
+                                    type="submit" class="btn btn-primary buy-btn">
+                                        Buy
+                                </button>
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <footer class="container margin">
+            <form class="form__contact">
+                <div class="form-row">
+                    <div class="col">
+                    <input type="text" class="form-control" id="input_name" placeholder="First name">
+                    </div>
+                </div>
+                <br>
+                <div class="form-row">
+                    <div class="col">
+                    <input type="text" class="form-control" id="input_phone" placeholder="Phone number">
+                    </div>
+                </div>
+                <br>
+                <div class="form-group">
+                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Email address">
+                </div>  
+                <br>  
+                <div class="text">
+                    <textarea name="textarea" id="textaria" cols="30" rows="5"></textarea>
+                </div>
+                <button type="button" class="btn btn-primary" id="send">Send</button>
+            </form>
+        </footer>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
