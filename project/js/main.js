@@ -315,4 +315,7 @@ class ContactForm {
   }
 }
 
+
 const contact = new ContactForm();
+
+

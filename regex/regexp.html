@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -44,4 +45,52 @@
 </script>
 
 </body>
+=======
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Regexp</title>
+</head>
+<body>
+    
+<p id="p1">
+    'Let me have a look.'
+    'Are there any toys?'
+    'Hand it over at once!'
+    'I believe that too,'
+</p>
+
+<button onclick="substituteQuotes()">Заменить кавычки</button>
+
+<p id="p2">
+    'Let me have a look.'
+    'Are there any toys?'
+    'Hand it over at once!'
+    'I believe that too,'
+    didn't
+    aren't
+    isn't
+</p>
+
+<button onclick="substituteQuotesAdvanced()">Заменить кавычки</button>
+
+<script>
+    function substituteQuotes() {
+        const str = document.querySelector('#p1');
+        const regexp = new RegExp("'", "g");
+        const newStr = str.textContent.replace(regexp, '"');
+        str.innerHTML = newStr;
+    }
+
+    function substituteQuotesAdvanced() {
+        const str = document.querySelector('#p2');
+        const newStr = str.textContent.replace(/^'|(\s)'|'(\s)|'$/g, '$1"$2');       
+        str.innerHTML = newStr;
+    }
+</script>
+
+</body>
+>>>>>>> d1eb8a4088c6012ef2f979ea32e05a494e226bb2
 </html>
