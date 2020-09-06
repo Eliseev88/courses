@@ -315,8 +315,5 @@ class ContactForm {
   }
 }
 
-<<<<<<< HEAD
 const contact = new ContactForm();
-=======
-const contact = new ContactForm();
->>>>>>> d1eb8a4088c6012ef2f979ea32e05a494e226bb2
+
