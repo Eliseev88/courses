@@ -1,1 +1,1 @@
-create new studing branch
+new git version
