@@ -9,9 +9,7 @@ Vue.component('filtering', {
     methods: {
         filter(){
             let regexp = new RegExp(this.userSearch, 'i');
-            // this.$root.$refs.products.filtered = this.products.filter(el => regexp.test(el.product_name));
-            console.log(this.$root.$refs.products.filtered)
-            
+            this.$root.$refs.products.filtered = this.$root.$refs.products.products.filter(el => regexp.test(el.product_name));             
         }
     },
     template: `
