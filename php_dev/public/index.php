@@ -1,5 +1,5 @@
 <?php
-  include_once('functions.php');
+  include_once('../engine/functions.php');
 ?>
 <!DOCTYPE html>
 <html>
@@ -8,11 +8,8 @@
     <title>Загрузка изображений на сервер</title>
   </head>
   <body>
-    <form method="post" enctype="multipart/form-data">
-      <input type="file" name="file">
-      <input type="submit" value="Загрузить файл!">
-    </form>
     <?php
+    	include '../templates/upload.html'; // подключаем форму загрузки изображения
 	    // если была произведена отправка формы
 	    if(isset($_FILES['file'])) {
 	      // проверяем, можно ли загружать изображение
@@ -22,11 +19,7 @@
 	        // загружаем изображение на сервер
 	        makeUpload($_FILES['file']);
 	        echo "<strong>Файл успешно загружен!</strong>";
-	      }
-	      else{
-	        // выводим сообщение об ошибке
-	        echo "<strong>$check</strong>";  
-	      }
+	      } else echo "<strong>$check</strong>"; // выводим сообщение об ошибке    
 	    }
 
 	    echo '<hr>';
@@ -37,10 +30,8 @@
 	    // выводим картинки на экран
 	   	foreach ($gallery as $key => $value) { ?>
 			<a href="/img/<?=$value;?>" target="_blank" style="display: inline;">
-
 				<img src="/img/<?=$value;?>" alt="#" width="200" height="150">
 			</a>
-	   	<?php } ?>
-    
+	   	<?php } ?> 
   </body>
 </html>

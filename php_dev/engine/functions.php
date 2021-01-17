@@ -14,7 +14,7 @@
 	// интересует последний элемент массива - расширение
 	$mime = strtolower(end($getMime));
 	// объявим массив допустимых расширений
-	$types = array('jpg', 'png', 'gif', 'bmp', 'jpeg');
+	$types = ['jpg', 'png', 'gif', 'bmp', 'jpeg',];
 	
 	// если расширение не входит в список допустимых - return
 	if(!in_array($mime, $types))
@@ -32,7 +32,7 @@
   function getGallery() {
         //Выбираем все содержимое папки img, и записываем в массив $files
         $files = scandir("img/"); 
-        $gallery_files = array();
+        $gallery_files = [];
         foreach ($files as $key => $value) { //Проходим по массиму
             //Проверяем файл или нет, если файл, то:
             if (filetype("img/" . $value) == "file") { 
