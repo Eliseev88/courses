@@ -1,0 +1,13 @@
+{
+    "require": {
+        "twig/twig": "^3.0"
+    },
+
+    "scripts":  {
+        "dev": "php -S localhost:8888"
+    },
+    
+    "config": {
+        "process-timeout": 0
+    }
+}

@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Gallery</title>
+        <link rel="stylesheet" href="./css/style.css">
+    </head>
+    <body>
+    {% include "header.twig" %}
+    <main class="content">
+        {% include "uploadImg.twig" %}
+
+        {% if dbRespond == 'Изображение успешно загружено' %}
+            <p class="success">{{ dbRespond }}</p>
+            {% else %}
+            <p class="error">{{ dbRespond }}</p>
+            {% endif %}
+        <hr>
+
+        <div class="gallery__wrapper">
+            {% for img in gallery %} 
+                <a href="images.php?image={{ img.id }}" target="_blank">
+                    <img src="{{ img.address|escape }}" alt="some image" class="gallery__image">
+                </a>
+            {% endfor %}
+        </div>
+    </main>
+    {% include "footer.twig" %}
+    </body>
+</html>

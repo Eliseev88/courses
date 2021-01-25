@@ -1,0 +1,56 @@
+html, body {
+    height: 100%;
+  }
+
+body {
+    display: flex;
+    flex-direction: column;
+  }
+
+.gallery__title {
+    color: grey;
+    text-align: center;
+}
+
+.gallery__form {
+    display: flex;
+    justify-content: center;
+}
+
+.error {
+    text-align: center;
+    color: red;
+    font-weight: 900;
+}
+
+.success {
+    text-align: center;
+    color: green;
+    font-weight: 900;
+}
+
+.gallery__link {
+    margin: 20px 0;
+    display: block;
+    text-decoration: none;
+    color: grey;
+    font-size: 22px;
+}
+
+.gallery__image {
+    height: 100px;
+}
+
+.gallery__wrapper {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.content {
+    flex: 1 0 auto;
+}
+
+.footer {
+    flex-shrink: 0;
+  }
