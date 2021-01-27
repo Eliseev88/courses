@@ -1,0 +1,17 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Gallery</title>
+        <link rel="stylesheet" href="./css/style.css">
+    </head>
+    <body>
+    {% include "header.twig" %}
+    
+    <img src="{{address|escape}}">
+
+    <a href="gallery.php" class="gallery__link">Назад</a>
+
+    {% include "footer.twig" %}
+    </body>
+</html>
