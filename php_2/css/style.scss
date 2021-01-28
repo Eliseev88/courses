@@ -1,0 +1,21 @@
+@import "_vars";
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Lato', sans-serif;
+}
+
+a {
+    text-decoration: none;
+}
+
+.center {
+    padding: 30px calc(50% - 570px);
+}
+
+@import "blocks/catalog";
