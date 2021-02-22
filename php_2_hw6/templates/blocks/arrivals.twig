@@ -1,0 +1,15 @@
+    <!--- ARRIVALS -->
+    <div class="arrivals">
+        <div class="arrivals__box center">
+            <h2 class="arrivals__title">New Arrivals</h2>
+            <nav class="arrivals__nav">
+                <a href="/goods" class="arrivals__link">Catalog </a>
+                {% if flagCat %}
+                    <a href="/catalog/{{ category.id }}" class="arrivals__link">/{{ category.category_name }} </a>
+                {% endif %}
+                {% if flagGood %}
+                    <a href="#" class="arrivals__link active">/{{ good.name }}</a>
+                {% endif %}
+            </nav>
+        </div>
+    </div>

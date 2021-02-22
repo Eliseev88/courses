@@ -1,0 +1,48 @@
+/* PROMO */
+
+.promo {
+    height: 613px;
+    background-color: #e8e8e8;
+    background-image: url(../../img/promo.png);
+    background-repeat: no-repeat;
+    background-position: center -52px;
+    display: flex;
+    align-items: flex-start;
+
+    &__content {
+        margin-top: 224px;
+        padding-left: 24px;
+    }
+
+    &__suptitle {
+        color: $black;
+        font-size: 60px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        position: relative;
+    }
+
+    &__suptitle:before {
+        display: block;
+        content: "";
+        width: 12px;
+        height: 95px;
+        background-color: $pink;
+        position: absolute;
+        top: 16px;
+        left: -24px;
+    }
+
+    &__title {
+        color: $black;
+        font-size: 40px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    &__title--last_letter {
+        color: $pink;
+    }
+}

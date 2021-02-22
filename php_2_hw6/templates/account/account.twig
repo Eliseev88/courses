@@ -1,0 +1,36 @@
+{% extends 'layout.twig' %}
+
+{% block title %}My account{% endblock %}
+
+{% block content %}
+    <br>
+    <h1>Hello, {{ user.name }} </h1>
+    <a href="#">{{ user.email }}</a>
+    <br>
+    <h3>You were visited lately:</h3>
+    {% for el in history %}
+        {% if el.page == '/index' %}
+            <a href="/index">Main page</a>
+            <br>
+        {% endif %}
+        {% if el.page == '/account' %}
+            <a href="#">My account</a>
+            <br>
+        {% endif %}
+        {% if el.page == '/goods' %}
+            <a href="/goods">Catalog</a>
+            <br>
+        {% endif %}
+        {% if el.page == '/catalog' %}
+            <a href="/catalog">Catalog</a>
+            <br>
+        {% endif %}
+        {% if el.page == '/basket' %}
+            <a href="/basket">Basket</a>
+            <br>
+        {% endif %}
+    {% endfor %}
+    <br>
+    <a href="http://localhost:8888/account/logout">Logout</a>
+    <br>
+{% endblock %}

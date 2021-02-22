@@ -1,0 +1,32 @@
+   <!-- DELIVERY -->
+    <section class="delivery center">
+        <div class="delivery__box">
+            <h3 class="delivery__title">Shipping Adress</h3>
+            <form action="POST" class="delivery__form">
+                <label for="country"><i class="fas fa-caret-down"></i></label>
+                <select name="country" id="country" class="delivery__select">
+                    <option value="1">Bangladesh</option>
+                    <option value="2">Russia</option>
+                </select>
+                <input type="text" placeholder="State" class="delivery__input">
+                <input type="number" placeholder="Postcode / Zip" class="delivery__input">
+                <button class="delivery__btn">get a quote</button>
+            </form>
+        </div>
+        <div class="delivery__box">
+            <h3 class="delivery__title">coupon discount</h3>
+            <p class="delivery__subtitle">Enter your coupon code if you have one</p>
+            <input type="text" placeholder="State" class="delivery__input">
+            <button class="delivery__btn">Apply coupon</button>
+        </div>
+        <div class="delivery__box">
+            <div class="delivery__wrapper">
+                <div class="delivery__text">
+                    <div class="delivery__suptitle">Sub total&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${{ sum }}</div>
+                    <h3 class="delivery__title">GRAND TOTAL <span>${{ sum }}</span></h3>
+                </div>
+                <hr class="delivery__hr">
+                <a href="/order" class="delivery__link">proceed to checkout</a>
+            </div>
+        </div>
+    </section>

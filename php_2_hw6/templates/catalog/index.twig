@@ -1,0 +1,11 @@
+{% extends 'layout.twig' %}
+
+{% block title %}Catalog{% endblock %}
+
+{% block content %}
+    {% for item in categories %}
+        <li>
+            <a href="/catalog/{{ item.id }}">{{ item.category_name }}</a>
+        </li>
+    {% endfor %}
+{% endblock %}
