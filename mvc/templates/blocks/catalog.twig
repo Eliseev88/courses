@@ -1,0 +1,13 @@
+<!-- CATALOG -->     
+    <section class="catalog center">
+        <h3 class="catalog__header">Featured Items</h3>
+        <p class="catalog__header_text">Shop for items based on what we featured in this week</p>
+        <div class="catalog__main" id="main_cat">
+            {% for item in goods %}
+                {% include "blocks/catalog_item.twig" %}
+            {% endfor %}
+        </div>
+        <div class="catalog__button">
+            <a class="catalog__link" href="goods">Browse All Product<i class="fas fa-long-arrow-alt-right"></i></a>
+        </div>
+    </section>
