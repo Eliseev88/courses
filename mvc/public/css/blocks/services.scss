@@ -1,0 +1,12 @@
+/* SERVICES */
+
+.services {
+    padding: 90px 0 114px;
+    background-color: #222224;
+
+    &__box {
+        display: flex;
+        justify-content: space-between;
+        text-align: center;
+    }
+}
