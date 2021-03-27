@@ -1,0 +1,43 @@
+<!-- CART -->
+    <div class="cart center">
+        <header class="cart__header">
+            <div class="cart__inner">Product Details</div>
+            <div class="cart__inner">unite Price</div>
+            <div class="cart__inner">Quantity</div>
+            <div class="cart__inner">shipping</div>
+            <div class="cart__inner">Subtotal</div>
+            <div class="cart__inner">ACTION</div>
+        </header>
+        {% for good in goods %}
+            <div class="cart__block">
+                <div class="cart__item">
+                    <a href="/catalog/{{ good.category_id }}/{{ good.id }}"><img class="cart__img" src="/{{ good.image }}" alt="#"></a>
+
+                    <div class="cart__clother">
+                        <a class="cart__name" href="/catalog/{{ good.category_id }}/{{ good.id }}">
+                            {{ good.name }}
+                        </a>
+                        <div class="cart__properties">Color: <span>Red</span></div>
+                        <div class="cart__properties">Size: <span>Xll</span></div>
+                    </div>
+                </div>
+                <div class="cart__item">
+                    <div class="cart__value">${{ good.price }}</div>
+                </div>
+                <div class="cart__item">
+                    <input class="cart__input" type="number" min="1" max="10" value="{{ good.count }}">
+                </div>
+                <div class="cart__item">
+                    <div class="cart__value">FREE</div>
+                </div>
+                <div class="cart__item">
+                    <div class="cart__value">${{ good.price * good.count }}</div>
+                </div>
+                <div class="cart__item"><a href="" class="cart__icon_link"><i class="fas fa-times-circle"></i></a></div>
+            </div>
+        {% endfor %}
+        <div class="cart__options">
+            <a class="cart__link" href="/clear">cLEAR SHOPPING CART</a>
+            <a class="cart__link" href="/catalog">cONTINUE sHOPPING</a>
+        </div>
+    </div>

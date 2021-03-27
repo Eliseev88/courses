@@ -1,0 +1,14 @@
+{% extends 'layout.twig' %}
+
+{% block title %}
+    {{ category.category_name }} - {{ goood.name }}
+{% endblock %}
+
+{% block content %}
+    {% include "/blocks/arrivals.twig" %}
+    {% include "/blocks/slider.twig" %}
+    {% include "/blocks/order.twig" %}
+    {% include "/blocks/also.twig" %}
+    {% include "/blocks/subscribe.twig" %}
+    {% include "/blocks/contacts.twig" %}
+{% endblock %}
